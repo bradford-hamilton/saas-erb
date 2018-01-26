@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 gem 'devise'
 gem 'milia'
+gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'devise-bootstrap-views'
 # Use Puma as the app server
