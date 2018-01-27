@@ -1,6 +1,6 @@
 class Artifact < ApplicationRecord
   attr_accessor :upload
-
+  before_save :upload_to_s3
   belongs_to :project
 
   validates_presence_of :name, :upload
@@ -9,6 +9,16 @@ class Artifact < ApplicationRecord
   validate :uploaded_file_size
   
   MAX_FILESIZE = 10.megabytes
+
+  private
+
+  def upload_to_s3
+    s3 = Aws::S3::Resource.new
+    tenant_name = Tenant.find(Thread.current[:tenant_id]).name
+    obj = s3.bucket(ENV['AWS_S3_BUCKET']).object("#{tenant_name}/#{upload.original_filename}")
+    obj.upload_file(upload.path, acl: 'public-read')
+    self.key = obj.public_url
+  end
 
   def uploaded_file_size
     if upload
