@@ -2,7 +2,6 @@
 # put it in your config/initializers directory
 # values shown below are the defaults in milia
 Milia.setup do |config|
-
 # true if you wish to use a coupon-based option in your sign-up form
 # false to otherwise not expect a coupon attribute in the parameters
   config.use_coupon = false
@@ -34,12 +33,11 @@ Milia.setup do |config|
   # allows an app to expand the permitted attribute list
   # specify each attribute as a symbol
   # example: [:name]
-  config.whitelist_tenant_params = [:plan]
+  config.whitelist_tenant_params = [:plan, :token]
 
   # whitelist coupon params list
   # allows an app to expand the permitted attribute list
   # specify each attribute as a symbol
   # example: [:coupon]
   # config.whitelist_coupon_params = []
-
 end
